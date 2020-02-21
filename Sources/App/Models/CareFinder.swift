@@ -4,22 +4,23 @@ import FluentSQLite
 final class Carefinder: Codable {
     var id: UUID?
     let hospName: String
-    var insurance: [String]
     let latitude: Double
     let longitude: Double
-    var doctor: [Doctor]
+    //var doctor: [Doctor]
+    //var insurance: [Insurance]
     
-    init(hospName: String, insurance: [String], latitude: Double, longitude: Double, doctor: [Doctor]) {
+    init(hospName: String, latitude: Double, longitude: Double) {
         self.hospName = hospName
-        self.insurance = insurance
         self.latitude = latitude
         self.longitude = longitude
-        self.doctor = doctor
+        //self.doctor = doctor
+        //self.insurance = insurance
     }
     
 }
 
-class Doctor: Codable {
+final class Doctor: Codable {
+    var id: UUID?
     let name: String
     let prof: String
     
@@ -29,9 +30,23 @@ class Doctor: Codable {
     }
 }
 
+final class Insurance: Codable {
+    var id: UUID?
+    let name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+}
+
 //SQliteUUIDModel to map database ID types
 extension Carefinder: SQLiteUUIDModel {}
+//extension Doctor: SQLiteUUIDModel {}
 
-//To save the model in the database, you must create a table for it. Fluent does this with a Migration
+//sTo save the model in the database, you must create a table for it. Fluent does this with a Migration
 extension Carefinder: Migration {}
+//extension Doctor: Migration {}
 
+//Saving new data is done using Content
+extension Carefinder: Content {}
+//extension Doctor: Content {}
