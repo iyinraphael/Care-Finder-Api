@@ -3,9 +3,9 @@ import FluentPostgreSQL
 
 final class Carefinder: Codable {
     var id: UUID?
-    let hospName: String
-    let latitude: Double
-    let longitude: Double
+    var hospName: String
+    var latitude: Double
+    var longitude: Double
     //var doctor: [Doctor]
     //var insurance: [Insurance]
     
@@ -50,3 +50,5 @@ extension Carefinder: Migration {}
 //Saving new data is done using Content
 extension Carefinder: Content {}
 //extension Doctor: Content {}
+
+extension Carefinder: Parameter {}
