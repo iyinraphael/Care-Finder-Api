@@ -1,5 +1,5 @@
 import Vapor
-import FluentSQLite
+import FluentPostgreSQL
 
 final class Carefinder: Codable {
     var id: UUID?
@@ -40,7 +40,7 @@ final class Insurance: Codable {
 }
 
 //SQliteUUIDModel to map database ID types
-extension Carefinder: SQLiteUUIDModel {}
+extension Carefinder: PostgreSQLUUIDModel {}
 //extension Doctor: SQLiteUUIDModel {}
 
 //sTo save the model in the database, you must create a table for it. Fluent does this with a Migration
