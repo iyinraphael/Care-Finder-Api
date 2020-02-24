@@ -35,6 +35,7 @@ public func routes(_ router: Router) throws {
                 return careFinder.save(on: req)
             }
     }
+    
     //GET all data
     router.get("api", "carefinder") { req -> Future<[Carefinder]> in
         
@@ -71,7 +72,7 @@ public func routes(_ router: Router) throws {
     
     //SEARCH with FLUENT
     router.get("api", "carefinder", "search") { (req) -> Future<[Carefinder]> in
-        
+    
         guard let searhTerm = req.query[String.self, at: "term"] else { throw Abort(.badRequest)}
         
         return Carefinder.query(on: req)
