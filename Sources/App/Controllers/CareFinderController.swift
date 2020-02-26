@@ -14,6 +14,8 @@ struct CareFinderController: RouteCollection {
         carefinderRoutes.put(use: updateHandler)
         carefinderRoutes.get("search", use: searchHandler)
         carefinderRoutes.delete(use: deleteHandler)
+        carefinderRoutes.get(Carefinder.parameter, "doctor", use: getDoctorHandler)
+        carefinderRoutes.get(Carefinder.parameter, "insurance", use: getInsuranceHandler)
     }
     
     
@@ -63,4 +65,25 @@ struct CareFinderController: RouteCollection {
                     .delete(on: req)
                     .transform(to: HTTPStatus.noContent)
     }
+    
+    func getDoctorHandler(_ req: Request) throws -> Future <[Doctor]> {
+        return try req.parameters
+                    .next(Carefinder.self)
+                    .flatMap(to: [Doctor].self, { (carefinder)  in
+                try carefinder.doctor.query(on: req).all()
+            })
+    }
+    
+    func getInsuranceHandler(_ req: Request) throws -> Future <[Insurance]> {
+        return try req.parameters
+                    .next(Carefinder.self)
+                    .flatMap(to: [Insurance].self, { (carefinder)  in
+                try carefinder.insurance.query(on: req).all()
+            })
+    }
+    
+    
+
 }
+
+

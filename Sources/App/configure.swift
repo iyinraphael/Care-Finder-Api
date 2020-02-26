@@ -38,5 +38,11 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     
     var migrations = MigrationConfig()
     migrations.add(model: Carefinder.self, database: .psql)
+    migrations.add(model: Doctor.self, database: .psql)
+    migrations.add(model: Insurance.self, database: .psql)
     services.register(migrations)
+    
+    var commandConfig = CommandConfig.default()
+    commandConfig.useFluentCommands()
+    services.register(commandConfig)
 }
