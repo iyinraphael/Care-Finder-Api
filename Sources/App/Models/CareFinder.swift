@@ -89,11 +89,9 @@ extension Insurance {
 
 
 extension Carefinder {
-    
     var doctor: Children<Carefinder, Doctor> {
         return children(\.doctorID)
     }
-    
     var insurance: Children<Carefinder, Insurance> {
         return children(\.insuranceID)
     }
